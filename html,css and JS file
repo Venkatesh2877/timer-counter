@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Counter</title>
+
+
+  <!-- Styling the page -->
+  <style>
+
+    body{
+      background-color: darkcyan;
+    }
+    div{
+     height:100px; 
+     width: 100px;
+      margin: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    p{
+      text-align: center;
+      line-height: 80px;
+      height: 100px;
+      margin: 0px;
+      width: 100px;
+      background-color: white;
+      border-top: 2px solid black;
+    }
+
+    .next{
+      position: absolute;
+      top: 100px;
+      
+    }
+
+    .animate{
+      transition: all 0.5s;
+      top: 0px;
+    }
+  </style>
+</head>
+<body>
+  <label for="enter">Enter a number:</label>
+  <input type="text" id="enter" placeholder="$">
+  <button onclick="startCounter()">Start Counter</button>
+
+  <div style="background-color: black;">
+    <p class="current">0</p>
+    <p class="next">1</p>
+  </div>
+
+
+  <script >
+    var i=0;
+    var current= document.querySelector('.current');      //select the class current div
+    var next= document.querySelector('.next');            //select the class next div
+
+    
+//function thats start when the START COUNTER button is clicked
+    function startCounter(){
+       let n=document.getElementById("enter").value;     //to read input value
+      var interval=setInterval(function() {              //calling another function for the animation by passing a value "n"
+        animate(n);
+      }, 1000);
+    }
+
+function animate(n){                                    //animate function with variable 'n'
+      if(i>=n){                                         //a clearInterval function that stops the setInterval function when n value is reached
+        clearInterval(interval);
+        return;
+      }
+
+      next.classList.add('animate');                    //it adds the 'animate' class into next
+      setTimeout(function() {
+        current.innerHTML=i;                            //change the current innerHTML value after 500 millisec because we have to wait for animate transition to complete. 
+      },500);
+      
+      setTimeout(function(){                            //it removes the 'animate' class from next
+        next.classList.remove('animate');
+      },500);
+      next.innerHTML=i+1;                               //change the next innerHTML value
+      i++; 
+    }
+    
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
